@@ -1,1 +1,2 @@
-# StarGame2
+# StarGame
+LibGDX Shooter
