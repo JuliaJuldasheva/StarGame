@@ -1,13 +1,19 @@
 package ru.q1w2e3.base;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import ru.q1w2e3.screen.MenuScreen;
+
 
 public class BaseScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
+
 
     @Override
     public void show() { //отображение экрана
@@ -62,6 +68,7 @@ public class BaseScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) { //нажали мышью/пальцем на экране по какой-то координате
+
         return false;
     }
 
