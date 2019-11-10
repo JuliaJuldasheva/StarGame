@@ -19,8 +19,6 @@ public class MenuScreen1 extends BaseScreen {
     boolean movingUp;
     boolean movingDown;
 
-
-
     @Override
     public void show() {
         super.show();
@@ -30,7 +28,7 @@ public class MenuScreen1 extends BaseScreen {
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         shipSprite = new Sprite(shipTexture);
         shipSprite.setPosition(Gdx.graphics.getWidth()/2 - shipSprite.getWidth()/2,0);
-        batch.getProjectionMatrix().idt();
+
     }
 
     @Override

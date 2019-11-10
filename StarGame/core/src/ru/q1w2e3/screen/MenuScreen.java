@@ -15,7 +15,7 @@ public class MenuScreen extends BaseScreen {
 
     private Texture img;
     private Texture bg;
-    private Ship logo;
+    private Ship ship;
     private Background background;
 
 
@@ -24,8 +24,8 @@ public class MenuScreen extends BaseScreen {
         super.show();
         img = new Texture("small_ship.png");
         bg = new Texture("wall1.jpg");
-        logo = new Ship(new TextureRegion(img));
-        logo.setHeightProportion(0.15f);
+        ship = new Ship(new TextureRegion(img));
+        ship.setHeightProportion(0.15f);
         background = new Background(new TextureRegion(bg));
     }
 
@@ -36,7 +36,7 @@ public class MenuScreen extends BaseScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.draw(batch);
-        logo.draw(batch);
+        ship.draw(batch);
         batch.end();
     }
 
