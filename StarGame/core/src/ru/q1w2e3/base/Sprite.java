@@ -13,8 +13,6 @@ public class Sprite extends Rect {
     protected TextureRegion[] regions; //массив регионов
     protected int frame; // текущий кадр из массива регионов
 
-    public Sprite(){}
-
     public Sprite(TextureRegion region) {
         if (region == null) {
             throw new NullPointerException("region is null");
