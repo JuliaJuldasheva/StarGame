@@ -18,7 +18,6 @@ public class MenuScreen extends BaseScreen {
     private Ship ship;
     private Background background;
 
-
     @Override
     public void show() {
         super.show();
