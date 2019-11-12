@@ -18,7 +18,6 @@ public class MenuScreen extends BaseScreen {
     private Ship ship;
     private Background background;
 
-
     @Override
     public void show() {
         super.show();
@@ -32,12 +31,8 @@ public class MenuScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        background.draw(batch);
-        ship.draw(batch);
-        batch.end();
+        update(delta);
+        draw();
     }
 
     @Override
@@ -55,6 +50,20 @@ public class MenuScreen extends BaseScreen {
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer) {
+        ship.touchDown(touch, pointer);
         return false;
+    }
+
+    private void update(float delta) {
+        ship.update(delta);
+    }
+
+    private void draw() {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        background.draw(batch);
+        ship.draw(batch);
+        batch.end();
     }
 }
