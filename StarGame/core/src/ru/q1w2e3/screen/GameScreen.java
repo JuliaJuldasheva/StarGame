@@ -23,6 +23,9 @@ public class GameScreen extends BaseScreen {
     private Star[] stars;
     private Ship ship;
     private Background background;
+    //private TextureRegion region;
+    //private Texture texture;
+    //private Rect worldBounds;
 
     @Override
     public void show() {
@@ -37,6 +40,8 @@ public class GameScreen extends BaseScreen {
         }
         ship = new Ship(atlas);
 
+        //texture = new Texture("textures/small_ship.png");
+        //region = new TextureRegion(texture,texture.getWidth()/2,texture.getHeight());
     }
 
     @Override
@@ -64,12 +69,12 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public boolean keyDown(int keycode) {
-        return super.keyDown(keycode);
+        return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return super.keyUp(keycode);
+        return false;
     }
 
     @Override
@@ -100,6 +105,7 @@ public class GameScreen extends BaseScreen {
             star.draw(batch);
         }
         ship.draw(batch);
+        //batch.draw(region,0,0);
         batch.end();
     }
 }

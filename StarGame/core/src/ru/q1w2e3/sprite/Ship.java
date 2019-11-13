@@ -1,5 +1,6 @@
 package ru.q1w2e3.sprite;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
@@ -36,7 +37,6 @@ public class Ship extends Sprite {
         } else {
             pos.set(endPoint);
         }
-        checkBounds();
     }
 
     @Override
@@ -47,9 +47,23 @@ public class Ship extends Sprite {
         pos.set(posX, posY);
     }
 
-    private void checkBounds() {
-        if (getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
-        if (getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
+//    public boolean keyDown(int keycode) {
+//        if(keycode == Input.Keys.LEFT )
+//
+//        return false;
+//    }
+//
+//    public boolean keyUp(int keycode) {
+//        if(keycode == Input.Keys.RIGHT )
+//
+//        return false;
+//    }
 
-    }
+
+//    private void checkBounds() {
+//        if (getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
+//        if (getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
+//
+//    }
+
 }
