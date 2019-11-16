@@ -1,17 +1,25 @@
 package ru.q1w2e3.base;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.q1w2e3.math.Rect;
+import ru.q1w2e3.pool.BulletPool;
+import ru.q1w2e3.utils.Regions;
 
 public class Sprite extends Rect {
 
-    protected float angle; //угол поворота
-    protected float scale = 1f; //масштаб спрайта
-    protected TextureRegion[] regions; //массив регионов
-    protected int frame; // текущий кадр из массива регионов
+    protected float angle;
+    protected float scale = 1f;
+    protected TextureRegion[] regions;
+    protected int frame;
+    protected boolean destroyed;
+
+    public Sprite() {
+
+    }
 
     public Sprite(TextureRegion region) {
         if (region == null) {
@@ -21,7 +29,14 @@ public class Sprite extends Rect {
         regions[0] = region;
     }
 
-    public void draw(SpriteBatch batch) {
+    public Sprite(TextureRegion region, int rows, int cols, int frames) {
+        if (region == null) {
+            throw new NullPointerException("region is null");
+        }
+        this.regions = Regions.split(region, rows, cols, frames);
+    }
+
+      public void draw(SpriteBatch batch) {
         batch.draw(
                 regions[frame],
                 getLeft(), getBottom(),
@@ -68,5 +83,17 @@ public class Sprite extends Rect {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public void destroy() { //помечаем объект как destroyed
+        destroyed = true;
+    }
+
+    public void flushDestroy() { //сбрасываем destroy на false для повторного его использования
+        destroyed = false;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }

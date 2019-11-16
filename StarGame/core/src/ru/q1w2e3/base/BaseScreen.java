@@ -10,8 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.q1w2e3.math.MatrixUtils;
 import ru.q1w2e3.math.Rect;
+import ru.q1w2e3.sprite.Star;
 
 public class BaseScreen implements Screen, InputProcessor {
+
+    private static final int STAR_COUNT = 60;
 
     protected SpriteBatch batch;
     private Rect screenBounds;
@@ -22,6 +25,8 @@ public class BaseScreen implements Screen, InputProcessor {
     private Matrix3 screenToWorld;
 
     private Vector2 touch;
+
+    private Star[] stars;
 
     public BaseScreen() {
         this.screenBounds = new Rect();
