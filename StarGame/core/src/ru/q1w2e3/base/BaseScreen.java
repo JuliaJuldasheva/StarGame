@@ -3,6 +3,7 @@ package ru.q1w2e3.base;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
@@ -10,11 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.q1w2e3.math.MatrixUtils;
 import ru.q1w2e3.math.Rect;
-import ru.q1w2e3.sprite.Star;
 
 public class BaseScreen implements Screen, InputProcessor {
-
-    private static final int STAR_COUNT = 60;
 
     protected SpriteBatch batch;
     private Rect screenBounds;
@@ -25,8 +23,7 @@ public class BaseScreen implements Screen, InputProcessor {
     private Matrix3 screenToWorld;
 
     private Vector2 touch;
-
-    private Star[] stars;
+    private Music music;
 
     public BaseScreen() {
         this.screenBounds = new Rect();
@@ -67,6 +64,12 @@ public class BaseScreen implements Screen, InputProcessor {
 
     public void resize(Rect worldBounds) {
 
+    }
+
+    public void playMusic(Music music) {
+        this.music = music;
+        music.play();
+        music.setLooping(true);
     }
 
     @Override
