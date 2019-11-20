@@ -54,6 +54,7 @@ public class MenuScreen extends BaseScreen {
         }
         buttonExit = new ButtonExit(atlas);
         buttonPlay = new ButtonPlay(atlas, game);
+        playMusic(music);
     }
 
     @Override
@@ -61,7 +62,6 @@ public class MenuScreen extends BaseScreen {
         super.render(delta);
         update(delta);
         draw();
-        playMusic(music);
     }
 
     @Override

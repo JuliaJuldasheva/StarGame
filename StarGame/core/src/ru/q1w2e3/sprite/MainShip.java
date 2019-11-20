@@ -1,26 +1,18 @@
 package ru.q1w2e3.sprite;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import ru.q1w2e3.base.Sprite;
+import ru.q1w2e3.base.Ship;
 import ru.q1w2e3.math.Rect;
 import ru.q1w2e3.pool.BulletPool;
 
-public class MainShip extends Sprite {
+public class MainShip extends Ship {
 
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
-
-    private final Vector2 v0 = new Vector2(0.5f, 0);
-    private final Vector2 v = new Vector2();
-
-    private Rect worldBounds;
-    private BulletPool bulletPool;
-    private TextureRegion bulletRegion;
-    private Vector2 bulletV = new Vector2(0, 0.5f);
 
     private boolean pressedLeft;
     private boolean pressedRight;
@@ -28,14 +20,18 @@ public class MainShip extends Sprite {
     private int leftPointer = INVALID_POINTER;
     private int rightPointer = INVALID_POINTER;
 
-    private final float reloadInterval = 0.2f;
-    private float reloadTimer = 0f;
-
 
     public MainShip(TextureAtlas atlas, BulletPool bulletPool) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         this.bulletPool = bulletPool;
         bulletRegion = atlas.findRegion("bulletMainShip");
+        sound = Gdx.audio.newSound(Gdx.files.internal("sounds/laser.wav"));
+        v0.set(0.5f, 0);
+        reloadInterval = 0.2f;
+        bulletHeight = 0.01f;
+        damage = 1;
+        hp =100;
+        bulletV.set(0, 0.5f);
     }
 
     @Override
@@ -47,12 +43,7 @@ public class MainShip extends Sprite {
 
     @Override
     public void update(float delta) {
-        reloadTimer += delta;
-        if (reloadTimer > reloadInterval) {
-            reloadTimer = 0f;
-            shoot();
-        }
-        pos.mulAdd(v, delta);
+        super.update(delta);
         if (getRight() > worldBounds.getRight()) {
             setRight(worldBounds.getRight());
             stop();
@@ -138,6 +129,10 @@ public class MainShip extends Sprite {
         return false;
     }
 
+    public void dispose() {
+        sound.dispose();
+    }
+
     private void moveRight() {
         v.set(v0);
     }
@@ -150,8 +145,4 @@ public class MainShip extends Sprite {
         v.setZero();
     }
 
-    private void shoot() {
-        Bullet bullet = bulletPool.obtain();
-        bullet.set(this, bulletRegion, pos, bulletV, 0.01f, worldBounds, 1);
-    }
 }

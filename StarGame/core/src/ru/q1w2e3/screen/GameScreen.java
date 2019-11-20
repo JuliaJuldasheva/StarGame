@@ -11,9 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 import ru.q1w2e3.base.BaseScreen;
 import ru.q1w2e3.math.Rect;
 import ru.q1w2e3.pool.BulletPool;
+import ru.q1w2e3.pool.EnemyPool;
 import ru.q1w2e3.sprite.Background;
 import ru.q1w2e3.sprite.MainShip;
 import ru.q1w2e3.sprite.Star;
+import ru.q1w2e3.utils.EnemyEmitter;
 
 public class GameScreen extends BaseScreen {
 
@@ -27,6 +29,9 @@ public class GameScreen extends BaseScreen {
     private MainShip mainShip;
 
     private BulletPool bulletPool;
+    private EnemyPool enemyPool;
+
+    private EnemyEmitter enemyEmitter;
 
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 
@@ -46,7 +51,10 @@ public class GameScreen extends BaseScreen {
             stars[i] = new Star(atlas);
         }
         bulletPool = new BulletPool();
+        enemyPool = new EnemyPool(worldBounds, bulletPool);
         mainShip = new MainShip(atlas, bulletPool);
+        enemyEmitter = new EnemyEmitter(enemyPool,atlas, worldBounds);
+        playMusic(music);
     }
 
     @Override
@@ -54,7 +62,6 @@ public class GameScreen extends BaseScreen {
         update(delta);
         freeAllDestroyed();
         draw();
-        playMusic(music);
     }
 
     @Override
@@ -71,6 +78,9 @@ public class GameScreen extends BaseScreen {
         bg.dispose();
         atlas.dispose();
         music.dispose();
+        mainShip.dispose();
+        enemyPool.dispose();
+        enemyEmitter.dispose();
         super.dispose();
     }
 
@@ -104,10 +114,13 @@ public class GameScreen extends BaseScreen {
         }
         mainShip.update(delta);
         bulletPool.updateActiveSprites(delta);
+        enemyPool.updateActiveSprites(delta);
+        enemyEmitter.generate(delta);
     }
 
     private void freeAllDestroyed() {
         bulletPool.freeAllDestroyedActiveSprites();
+        enemyPool.freeAllDestroyedActiveSprites();
     }
 
     private void draw() {
@@ -120,6 +133,7 @@ public class GameScreen extends BaseScreen {
         }
         mainShip.draw(batch);
         bulletPool.drawActiveSprites(batch);
+        enemyPool.drawActiveSprites(batch);
         batch.end();
     }
 }
