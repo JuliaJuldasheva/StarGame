@@ -1,12 +1,10 @@
 package ru.q1w2e3.base;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.q1w2e3.math.Rect;
-import ru.q1w2e3.pool.BulletPool;
 import ru.q1w2e3.utils.Regions;
 
 public class Sprite extends Rect {
