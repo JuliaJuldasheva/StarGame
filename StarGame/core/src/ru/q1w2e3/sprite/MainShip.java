@@ -12,6 +12,7 @@ import ru.q1w2e3.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
+
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
 
@@ -45,14 +46,15 @@ public class MainShip extends Ship {
     @Override
     public void update(float delta) {
         super.update(delta);
-        if (getRight() > worldBounds.getRight()) {
-            setRight(worldBounds.getRight());
-            stop();
-        }
-        if (getLeft() < worldBounds.getLeft()) {
-            setLeft(worldBounds.getLeft());
-            stop();
-        }
+
+            if (getRight() > worldBounds.getRight()) {
+                setRight(worldBounds.getRight());
+                stop();
+            }
+            if (getLeft() < worldBounds.getLeft()) {
+                setLeft(worldBounds.getLeft());
+                stop();
+            }
     }
 
     public void keyDown(int keycode) {
