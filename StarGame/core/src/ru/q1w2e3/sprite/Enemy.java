@@ -14,6 +14,7 @@ public class Enemy extends Ship {
     private enum State { DESCENT, FIGHT }
 
     private State state;
+
     private Vector2 descentV = new Vector2(0, -0.15f);
 
     public Enemy(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
@@ -29,31 +30,31 @@ public class Enemy extends Ship {
         switch (state) {
             case DESCENT:
                 reloadTimer = 0f;
-                if(getTop() <= worldBounds.getTop()) {
+                if (getTop() <= worldBounds.getTop()) {
                     v.set(v0);
                     state = State.FIGHT;
                     reloadTimer = reloadInterval;
                 }
                 break;
             case FIGHT:
-                if(getBottom() < worldBounds.getBottom()) {
+                if (getBottom() < worldBounds.getBottom()) {
                     destroy();
                 }
                 break;
         }
     }
 
-    public void set (
-        TextureRegion [] regions,
-        Vector2 v0,
-        TextureRegion bulletRegion,
-        float bulletHeight,
-        float bulletVY,
-        int damage,
-        float reloadInterval,
-        Sound sound,
-        float height,
-        int hp
+    public void set(
+            TextureRegion[] regions,
+            Vector2 v0,
+            TextureRegion bulletRegion,
+            float bulletHeight,
+            float bulletVY,
+            int damage,
+            float reloadInterval,
+            Sound sound,
+            float height,
+            int hp
     ) {
         this.regions = regions;
         this.v0.set(v0);
@@ -69,13 +70,12 @@ public class Enemy extends Ship {
         state = State.DESCENT;
     }
 
-    public boolean isBulletColision(Rect bullet) {
+    public boolean isBulletCollision(Rect bullet) {
         return !(
                 bullet.getRight() < getLeft()
                         || bullet.getLeft() > getRight()
-                        || bullet.getBottom() > getBottom()
+                        || bullet.getBottom() > getTop()
                         || bullet.getTop() < pos.y
         );
     }
-
 }
