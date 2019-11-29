@@ -42,6 +42,7 @@ public class MenuScreen extends BaseScreen {
         super.playMusic(music);
     }
 
+
     @Override
     public void show() {
         super.show();
@@ -54,7 +55,7 @@ public class MenuScreen extends BaseScreen {
         }
         buttonExit = new ButtonExit(atlas);
         buttonPlay = new ButtonPlay(atlas, game);
-        playMusic(music);
+        //playMusic(music);
     }
 
     @Override

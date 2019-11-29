@@ -9,14 +9,14 @@ public class GameOver extends Sprite {
 
     public GameOver(TextureAtlas atlas) {
         super(atlas.findRegion("message_game_over"));
-        setHeightProportion(0.05f);
     }
 
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
-        setHeightProportion(1f);
+        setHeightProportion(0.05f);
         this.pos.set(worldBounds.pos);
+        //setTop(0.08f);
     }
 
 }

@@ -12,9 +12,9 @@ import ru.q1w2e3.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
-
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
+    private static final int HP = 10;
 
     private boolean pressedLeft;
     private boolean pressedRight;
@@ -32,8 +32,18 @@ public class MainShip extends Ship {
         reloadInterval = 0.2f;
         bulletHeight = 0.01f;
         damage = 1;
-        hp = 5;
+        hp = HP;
         bulletV.set(0, 0.5f);
+    }
+
+    public void startNewGame(Rect worldBounds) {
+        pressedLeft = false;
+        pressedRight = false;
+        leftPointer = INVALID_POINTER;
+        rightPointer = INVALID_POINTER;
+        stop();
+        hp = HP;
+        pos.x = worldBounds.pos.x;
     }
 
     @Override
@@ -43,18 +53,16 @@ public class MainShip extends Ship {
         setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
     }
 
-    @Override
     public void update(float delta) {
         super.update(delta);
-
-            if (getRight() > worldBounds.getRight()) {
-                setRight(worldBounds.getRight());
-                stop();
-            }
-            if (getLeft() < worldBounds.getLeft()) {
-                setLeft(worldBounds.getLeft());
-                stop();
-            }
+        if (getRight() > worldBounds.getRight()) {
+            setRight(worldBounds.getRight());
+            stop();
+        }
+        if (getLeft() < worldBounds.getLeft()) {
+            setLeft(worldBounds.getLeft());
+            stop();
+        }
     }
 
     public void keyDown(int keycode) {

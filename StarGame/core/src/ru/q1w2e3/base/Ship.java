@@ -10,7 +10,8 @@ import ru.q1w2e3.pool.ExplosionPool;
 import ru.q1w2e3.sprite.Bullet;
 import ru.q1w2e3.sprite.Explosion;
 
-public abstract class Ship extends Sprite{
+
+public abstract class Ship extends Sprite {
 
     protected final Vector2 v0 = new Vector2();
     protected final Vector2 v = new Vector2();
@@ -22,18 +23,17 @@ public abstract class Ship extends Sprite{
     protected Vector2 bulletV = new Vector2();
     protected Sound sound;
     protected float bulletHeight;
-    protected int  damage;
+    protected int damage;
 
     protected int hp;
-
-    protected float animateInterval = 0.05f;
-    protected float animateTimer = animateInterval;
 
     protected float reloadInterval = 0f;
     protected float reloadTimer = 0f;
 
-    public Ship() {
+    protected float animateInterval = 0.05f;
+    protected float animateTimer = animateInterval;
 
+    public Ship() {
     }
 
     public Ship(TextureRegion region, int rows, int cols, int frames) {
@@ -63,6 +63,7 @@ public abstract class Ship extends Sprite{
     public void damage(int damage) {
         hp -= damage;
         if (hp <= 0) {
+            hp = 0;
             destroy();
         }
         animateTimer = 0f;
@@ -73,6 +74,14 @@ public abstract class Ship extends Sprite{
         return damage;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     protected void shoot() {
         sound.play(0.3f);
         Bullet bullet = bulletPool.obtain();
@@ -80,7 +89,7 @@ public abstract class Ship extends Sprite{
     }
 
     protected void boom() {
-       Explosion explosion = explosionPool.obtain();
-       explosion.set(pos,getHeight());
+        Explosion explosion = explosionPool.obtain();
+        explosion.set(pos, getHeight());
     }
 }
